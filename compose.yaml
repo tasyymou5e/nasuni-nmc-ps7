@@ -1,0 +1,61 @@
+# Nasuni.Nmc on Docker Desktop (or any Docker host).
+#   docker compose up --build demo          # local demo: http://localhost:8765 (sign in as viewer/op/admin)
+#   docker compose --profile prod up -d dashboard   # production-style dashboard (needs config + secrets)
+#   docker compose --profile test build tests       # run every build gate on Linux
+# See docs/DOCKER.md.
+
+name: nasuni-nmc
+
+services:
+  demo:
+    build: { context: ., dockerfile: docker/Dockerfile, target: demo }
+    image: nasuni-nmc:demo
+    command: ["demo"]
+    environment:
+      DEMO_PORT: "8765"
+    # Development sign-in: publish to the HOST LOOPBACK ONLY (the dashboard refuses to start otherwise
+    # unless this is a container with Dev.PublishedToHostLoopbackOnly, which the demo sets).
+    ports: ["127.0.0.1:8765:8765"]
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777", "/home/nasuni:size=16m,uid=10001,gid=10001"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    healthcheck:
+      test: ["CMD", "pwsh", "-NoProfile", "-Command", "$$c=[System.Net.Sockets.TcpClient]::new(); try { $$c.Connect('127.0.0.1', 8765); exit 0 } catch { exit 1 } finally { $$c.Dispose() }"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  dashboard:
+    profiles: ["prod"]
+    build: { context: ., dockerfile: docker/Dockerfile, target: runtime }
+    image: nasuni-nmc:runtime
+    command: ["dashboard"]
+    environment:
+      NASUNI_ENVIRONMENT: Production
+      NASUNI_LOG_LEVEL: Info
+      NASUNI_DASHBOARD_CONFIG: /etc/nasuni/dashboard-config.psd1
+    ports: ["8443:8443"]
+    volumes:
+      - ./deploy/config:/etc/nasuni:ro              # dashboard-config.psd1, Vault CA, Vault client cert/key (chmod 600)
+      - nasuni-data:/var/lib/nasuni                 # audit log + report CSVs (set AuditLogPath under /var/lib/nasuni)
+    read_only: true
+    tmpfs: ["/tmp:size=128m,mode=1777", "/home/nasuni:size=16m,uid=10001,gid=10001"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pwsh", "-NoProfile", "-Command", "$$c=[System.Net.Sockets.TcpClient]::new(); try { $$c.Connect('127.0.0.1', 8443); exit 0 } catch { exit 1 } finally { $$c.Dispose() }"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  tests:
+    profiles: ["test"]
+    build: { context: ., dockerfile: docker/Dockerfile, target: test }
+    image: nasuni-nmc:test
+
+volumes:
+  nasuni-data: {}

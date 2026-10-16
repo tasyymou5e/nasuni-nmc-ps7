@@ -1,0 +1,13 @@
+.git
+.github
+.launch
+coverage.xml
+testResults.xml
+**/*.key
+**/*.pfx
+**/mcp-config.psd1
+deploy/config
+remove
+demo
+**/.DS_Store
+**/._*

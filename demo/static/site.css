@@ -1,0 +1,26 @@
+:root { --bg: #ffffff; --fg: #1d2330; --muted: #5d6676; --line: #dfe3ea; --accent: #1f5fbf; --bad: #b42318; --ok: #1a7f37; --tile: #f5f7fb; }
+@media (prefers-color-scheme: dark) { :root { --bg: #11151c; --fg: #e6e9ef; --muted: #9aa4b2; --line: #2a313d; --accent: #6ea8ff; --bad: #ff7b72; --ok: #56d364; --tile: #1a202a; } }
+* { box-sizing: border-box; }
+body { margin: 0; font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--fg); }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+header nav { display: flex; flex-wrap: wrap; gap: 10px; flex: 1; }
+header a, main a { color: var(--accent); }
+header a { text-decoration: none; }
+.user { color: var(--muted); }
+main { padding: 16px; max-width: 1400px; }
+h1 { font-size: 20px; margin: 4px 0 8px; }
+.stamp, .note, .empty { color: var(--muted); }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; display: block; overflow-x: auto; }
+th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; white-space: nowrap; }
+td { white-space: normal; word-break: break-word; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 12px 0; }
+.tile { display: flex; flex-direction: column; padding: 12px; background: var(--tile); border: 1px solid var(--line); border-radius: 8px; color: var(--fg); text-decoration: none; }
+.tile .n { font-size: 26px; font-weight: 600; }
+.button, button { display: inline-block; padding: 6px 12px; border: 1px solid var(--accent); border-radius: 6px; background: transparent; color: var(--accent); font: inherit; cursor: pointer; text-decoration: none; }
+form.inline { display: inline; }
+input[type=text] { padding: 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); min-width: 320px; }
+.preview { border: 1px solid var(--line); padding: 12px; border-radius: 8px; }
+.preview.danger { border-color: var(--bad); }
+.bad, .errors { color: var(--bad); }
+.ok { color: var(--ok); }
+code { background: var(--tile); padding: 1px 4px; border-radius: 4px; }

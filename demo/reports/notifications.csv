@@ -1,0 +1,5 @@
+"Date","Priority","Name","Message","Origin","Acknowledged"
+"10/16/2026 16:58:39","error","Edge Appliance offline","NEA-LON-03 has not checked in for 2 hours","NEA-LON-03","False"
+"10/16/2026 16:23:39","alert","Antivirus violation","Infected file detected on Engineering","NEA-SG-04","False"
+"10/16/2026 14:10:39","warning","Cache usage high","Cache is 91% full","NEA-LA-02","True"
+"10/16/2026 11:10:39","info","Snapshot complete","Finance snapshot 18422 complete","NEA-NY-01","True"

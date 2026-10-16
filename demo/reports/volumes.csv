@@ -1,0 +1,5 @@
+"Name","GUID","Owner filer","Provider","Protocols","Auth policy","Antivirus","Remote access","Quota","Snapshot retention"
+"Finance","vol-finance","NEA-NY-01","Amazon S3","CIFS","ads","True","True","0","INFINITE"
+"Engineering","vol-eng","NEA-LA-02","Azure Blob","CIFS; NFS","ads","True","True","0","BY_AGE"
+"Media","vol-media","NEA-LA-02","Azure Blob","CIFS","ads","False","False","50000","BY_COUNT"
+"HR","vol-hr","NEA-NY-01","Amazon S3","CIFS","ads","True","True","0","INFINITE"

@@ -1,0 +1,5 @@
+"memory","smb","cpu","nfs","filesystem","filer_serial_number","network"
+"Healthy","Healthy","Healthy","Healthy","Healthy","NEA-NY-01","Healthy"
+"Warning","Healthy","Healthy","Healthy","Healthy","NEA-LA-02","Healthy"
+"Unknown","Unknown","Unknown","Unknown","Unknown","NEA-LON-03","Unhealthy"
+"Healthy","Healthy","Healthy","Healthy","Healthy","NEA-SG-04","Healthy"

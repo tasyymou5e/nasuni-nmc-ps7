@@ -1,0 +1,5 @@
+"Serial","Description","Build","Management","Offline","OS version","Uptime (s)"
+"NEA-NY-01","New York HQ","10.2.1-115","nmc","False","10.2.1","1843200"
+"NEA-LA-02","Los Angeles","10.2.1-115","nmc","False","10.2.1","922000"
+"NEA-LON-03","London","10.1.4-090","nmc","True","10.1.4","0"
+"NEA-SG-04","Singapore","10.2.1-115","nmc","False","10.2.1","401000"

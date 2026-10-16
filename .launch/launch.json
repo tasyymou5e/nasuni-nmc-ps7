@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nasuni-dashboard-docker",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "-f", "compose.yaml", "up", "demo"],
+      "port": 8765
+    },
+    {
+      "name": "nasuni-dashboard-demo",
+      "runtimeExecutable": "pwsh",
+      "runtimeArgs": ["-NoProfile", "-File", "tools/Start-DashboardDemo.ps1", "-Port", "8765"],
+      "port": 8765
+    }
+  ]
+}
